@@ -78,8 +78,12 @@ app.post('/api/downloads', async (req, res) => {
   }
 });
 
-app.use(express.static('build'));
-app.use((_req, res) => res.sendFile(path.join(__dirname, 'build', 'index.html')));
+// Serve static build only if folder exists (production with frontend bundled)
+const buildPath = path.join(__dirname, 'build');
+if (require('fs').existsSync(buildPath)) {
+  app.use(express.static(buildPath));
+  app.use((_req, res) => res.sendFile(path.join(buildPath, 'index.html')));
+}
 
 io.on('connection', (socket) => {
   console.log('socket connected:', socket.id);
