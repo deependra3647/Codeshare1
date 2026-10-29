@@ -1,4 +1,4 @@
-.homePageWrapper {
+﻿.homePageWrapper {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -151,6 +151,125 @@ footer a:hover {
 .mainWrap {
     display: grid;
     grid-template-columns: 230px 1fr;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.workspace {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    height: 100vh;
+    background: #282a36;
+}
+
+.editorHeader {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    align-items: center;
+    height: 48px;
+    flex-shrink: 0;
+    background: #1c1e29;
+    border-bottom: 1px solid #424242;
+}
+
+.editorHeaderCenter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.runBtn {
+    background: #4aed88;
+    color: #1c1e29;
+    min-width: 110px;
+    padding: 8px 28px;
+}
+
+.runBtn:hover:not(:disabled) {
+    background: #2b824c;
+    color: #fff;
+}
+
+.runBtn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.editorBody {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 340px;
+    flex: 1;
+    min-height: 0;
+}
+
+.editorwrap {
+    min-width: 0;
+    height: 100%;
+    overflow: hidden;
+}
+
+.outputPanel {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    height: 100%;
+    background: #15171f;
+    border-left: 1px solid #424242;
+    color: #d6d6d6;
+    overflow: hidden;
+}
+
+.outputPanelHeader {
+    flex-shrink: 0;
+    padding: 10px 14px;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    color: #aaa;
+    border-bottom: 1px solid #424242;
+    background: #1c1e29;
+}
+
+.outputPanelBody {
+    flex: 1;
+    min-height: 0;
+    overflow: auto;
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.outputPanelBody pre {
+    margin: 0;
+    white-space: pre-wrap;
+    word-break: break-word;
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.outputStdout {
+    color: #e8e8e8;
+}
+
+.outputStderr {
+    color: #ff6b6b;
+}
+
+.outputRunning,
+.outputPlaceholder {
+    color: #888;
+}
+
+.outputPreview {
+    width: 100%;
+    min-height: 220px;
+    flex: 1;
+    border: 1px solid #424242;
+    border-radius: 6px;
+    background: #fff;
 }
 
 .aside {
@@ -260,10 +379,15 @@ footer a:hover {
     margin-top: 20px;
 }
 .CodeMirror {
-    min-height: calc(100vh - 20px);
+    height: 100% !important;
+    min-height: 100%;
     font-size: 20px;
     line-height: 1.6;
     padding-top: 20px;
+}
+
+.editorwrap .CodeMirror {
+    height: 100% !important;
 }
 /* Animated Particles Background */
 .particles-bg {
@@ -951,3 +1075,505 @@ footer a:hover {
 .confirmBtn:hover { background: #2b824c; color: #fff; }
 .cancelBtn { background: #ff4444; color: #fff; }
 .cancelBtn:hover { background: #cc0000; }
+
+/* ── Language Selector ── */
+.languageSelectorWrap {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.languageLabel {
+    font-size: 12px;
+    font-weight: bold;
+    color: #aaa;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.languageSelect {
+    width: 100%;
+    padding: 8px 10px;
+    border-radius: 6px;
+    border: 1px solid #424242;
+    background: #2d2f3e;
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.2s, background 0.2s;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23aaa' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    padding-right: 28px;
+}
+
+.languageSelect:hover:not(:disabled) {
+    border-color: #4aed88;
+    background-color: #363849;
+}
+
+.languageSelect:focus {
+    border-color: #4aed88;
+    box-shadow: 0 0 0 2px rgba(74, 237, 136, 0.2);
+}
+
+.languageSelect:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+.languageSelect option {
+    background: #2d2f3e;
+    color: #fff;
+}
+
+
+/* ── Stdin + Output split layout ── */
+.stdinSection {
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 38%;
+    border-bottom: 2px solid #424242;
+    min-height: 0;
+}
+
+.stdinInput {
+    flex: 1;
+    background: #1a1c28;
+    color: #e8e8e8;
+    border: none;
+    outline: none;
+    resize: none;
+    padding: 10px 14px;
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.stdinInput::placeholder {
+    color: #555;
+    font-style: italic;
+}
+
+.outputSection {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+}
+
+/* ── File Share Panel ── */
+.fileSharePanel {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: #1a1c28;
+    color: #d6d6d6;
+    overflow: hidden;
+}
+
+.fileShareHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 20px;
+    background: #1c1e29;
+    border-bottom: 1px solid #424242;
+    font-size: 15px;
+    font-weight: bold;
+    color: #fff;
+    flex-shrink: 0;
+}
+
+.fileUploadBtn {
+    background: #4aed88;
+    color: #1c1e29;
+    border: none;
+    border-radius: 6px;
+    padding: 7px 16px;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.fileUploadBtn:hover {
+    background: #2b824c;
+    color: #fff;
+}
+
+.fileShareBody {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+.fileShareEmpty {
+    color: #666;
+    font-size: 14px;
+    font-style: italic;
+    text-align: center;
+    margin-top: 40px;
+}
+
+.fileList {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.fileItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #22243a;
+    border: 1px solid #424242;
+    border-radius: 8px;
+    padding: 12px 16px;
+    gap: 12px;
+}
+
+.fileInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+}
+
+.fileName {
+    font-size: 14px;
+    font-weight: bold;
+    color: #e8e8e8;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.fileMeta {
+    font-size: 12px;
+    color: #888;
+}
+
+.fileDownloadBtn {
+    background: #4a90e2;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 14px;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: background 0.2s;
+}
+
+.fileDownloadBtn:hover {
+    background: #357abd;
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   AI Code Explainer
+   ════════════════════════════════════════════════════════════ */
+
+/* Explain button in the editor header toolbar */
+.aiExplainHeaderBtn {
+    background: #7c3aed;
+    color: #fff;
+    min-width: 110px;
+    padding: 8px 20px;
+    margin-left: 10px;
+    font-size: 14px;
+}
+
+.aiExplainHeaderBtn:hover {
+    background: #5b21b6;
+}
+
+/* ── Panel shell ── */
+.aiPanel {
+    display: flex;
+    flex-direction: column;
+    width: 340px;
+    min-width: 340px;
+    height: 100%;
+    background: #15171f;
+    border-left: 1px solid #424242;
+    color: #d6d6d6;
+    overflow: hidden;
+    font-size: 14px;
+}
+
+/* ── Panel header ── */
+.aiPanelHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+    padding: 10px 14px;
+    background: #1c1e29;
+    border-bottom: 1px solid #424242;
+}
+
+.aiPanelTitle {
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    color: #c4b5fd;
+}
+
+.aiPanelClose {
+    background: transparent;
+    border: none;
+    color: #888;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 2px 6px;
+    border-radius: 4px;
+    line-height: 1;
+    transition: color 0.15s, background 0.15s;
+}
+
+.aiPanelClose:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+/* ── Action bar ── */
+.aiActionBar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+    padding: 10px 14px;
+    border-bottom: 1px solid #2e3048;
+    background: #1a1c28;
+}
+
+.aiExplainBtn {
+    flex: 1;
+    background: #7c3aed;
+    color: #fff;
+    font-size: 13px;
+    padding: 8px 12px;
+}
+
+.aiExplainBtn:hover:not(:disabled) {
+    background: #5b21b6;
+}
+
+.aiExplainBtn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.aiCopyBtn {
+    background: #2d2f3e;
+    color: #c4b5fd;
+    border: 1px solid #424242;
+    font-size: 12px;
+    padding: 7px 12px;
+    white-space: nowrap;
+}
+
+.aiCopyBtn:hover {
+    background: #363849;
+    border-color: #7c3aed;
+}
+
+/* Loading row inside the Explain button */
+.aiLoadingRow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: center;
+}
+
+.aiSpinner {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    flex-shrink: 0;
+}
+
+/* ── Selection badge ── */
+.aiSelectionBadge {
+    flex-shrink: 0;
+    padding: 5px 14px;
+    background: #1e1a35;
+    border-bottom: 1px solid #2e3048;
+    font-size: 11px;
+    color: #a78bfa;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+}
+
+/* ── Panel body (scrollable) ── */
+.aiPanelBody {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+/* ── Placeholder ── */
+.aiPlaceholder {
+    color: #666;
+    font-size: 13px;
+    line-height: 1.6;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.aiPlaceholder p {
+    margin: 0;
+}
+
+.aiPlaceholder strong {
+    color: #a78bfa;
+}
+
+/* ── Loading message ── */
+.aiLoadingMessage {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #888;
+    font-size: 13px;
+    margin-top: 10px;
+}
+
+.aiPulse {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #7c3aed;
+    animation: aiPulse 1.2s ease-in-out infinite;
+    flex-shrink: 0;
+}
+
+@keyframes aiPulse {
+    0%, 100% { transform: scale(0.8); opacity: 0.5; }
+    50%       { transform: scale(1.2); opacity: 1; }
+}
+
+/* ── Error box ── */
+.aiError {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    background: rgba(255, 70, 70, 0.1);
+    border: 1px solid rgba(255, 70, 70, 0.3);
+    border-radius: 6px;
+    padding: 10px 12px;
+    color: #ff8a8a;
+    font-size: 13px;
+    line-height: 1.5;
+    margin-top: 6px;
+}
+
+.aiErrorIcon {
+    flex-shrink: 0;
+    font-size: 15px;
+}
+
+/* ── Explanation content ── */
+.aiExplanation {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 13px;
+    line-height: 1.65;
+    color: #d0d0d0;
+}
+
+.aiParagraph {
+    margin: 0;
+}
+
+.aiSpacer {
+    height: 6px;
+}
+
+.aiHeading {
+    color: #c4b5fd;
+    font-weight: bold;
+    margin: 6px 0 2px;
+}
+
+.aiHeading1 { font-size: 15px; }
+.aiHeading2 { font-size: 14px; }
+.aiHeading3, .aiHeading4 { font-size: 13px; }
+
+.aiList {
+    margin: 4px 0;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.aiListItem {
+    line-height: 1.55;
+}
+
+.aiInlineCode {
+    background: #2a2d3e;
+    color: #a78bfa;
+    padding: 1px 5px;
+    border-radius: 4px;
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+    font-size: 12px;
+}
+
+.aiCodeBlock {
+    position: relative;
+    background: #1a1c28;
+    border: 1px solid #333650;
+    border-radius: 6px;
+    padding: 10px 12px;
+    margin: 6px 0;
+    overflow-x: auto;
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+    font-size: 12px;
+    line-height: 1.5;
+    color: #e0e0e0;
+    white-space: pre;
+}
+
+.aiCodeLang {
+    display: block;
+    font-size: 10px;
+    color: #7c3aed;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+    font-family: inherit;
+    font-weight: bold;
+}
+
+.aiCodeBlock code {
+    background: none;
+    padding: 0;
+    color: inherit;
+    font-size: inherit;
+}

@@ -16,6 +16,8 @@ const ACTIONS = {
     REJECT_JOIN: 'reject-join',
     JOIN_APPROVED: 'join-approved',
     JOIN_REJECTED: 'join-rejected',
+    LANGUAGE_CHANGE: 'language-change',
+    FILE_SHARE: 'file-share',
 };
 
 module.exports = ACTIONS;
