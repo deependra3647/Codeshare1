@@ -21,6 +21,7 @@ app.use((req, res, next) => {
 
 const server = http.createServer(app);
 const io = new Server(server, {
+  maxHttpBufferSize: 10 * 1024 * 1024, // 10 MB — needed for file share (base64 dataUrl)
   cors: {
     origin: process.env.FRONTEND_URL || '*',
     methods: ['GET', 'POST'],
