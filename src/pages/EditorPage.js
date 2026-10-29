@@ -1,4 +1,4 @@
-﻿import React, { useRef, useState, useEffect, useCallback } from "react";
+import React, { useRef, useState, useEffect, useCallback } from "react";
 import toast from "react-hot-toast";
 import ACTIONS from "../Actions";
 import Client from "../components/Client";
@@ -488,5 +488,3 @@ const EditorPage = () => {
 };
 
 export default EditorPage;
-
-

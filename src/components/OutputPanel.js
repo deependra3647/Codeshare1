@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 
 const OutputPanel = ({ output, error, isRunning, previewHtml, stdin, onStdinChange }) => {
   const hasError   = Boolean(error);
@@ -8,7 +8,7 @@ const OutputPanel = ({ output, error, isRunning, previewHtml, stdin, onStdinChan
   return (
     <aside className="outputPanel">
 
-      {/* ── stdin ── */}
+      {/* stdin */}
       <div className="stdinSection">
         <div className="outputPanelHeader">stdin (User Input)</div>
         <textarea
@@ -20,7 +20,7 @@ const OutputPanel = ({ output, error, isRunning, previewHtml, stdin, onStdinChan
         />
       </div>
 
-      {/* ── output ── */}
+      {/* output */}
       <div className="outputSection">
         <div className="outputPanelHeader">Output / Console</div>
         <div className="outputPanelBody">

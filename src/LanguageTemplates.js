@@ -1,4 +1,4 @@
-﻿export const LANGUAGES = [
+export const LANGUAGES = [
   { id: "plaintext", label: "📝 Plain Text", mode: "null"         },
   { id: "javascript", label: "JavaScript",  mode: { name: "javascript", json: false } },
   { id: "python",     label: "Python",      mode: "python"       },
@@ -140,9 +140,6 @@ function greet(name: string): string {
 console.log(greet("World"));
 `,
 
-
-
-
   swift: `// Swift
 import Foundation
 
@@ -152,6 +149,4 @@ func greet(_ name: String) -> String {
 
 print(greet("World"))
 `,
-
 };
-
